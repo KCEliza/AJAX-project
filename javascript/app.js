@@ -3,6 +3,7 @@ $(document).ready(function() {
 
     
   function display(){
+    $("#giphy-view").empty();
     var topic = $(this).attr("data-topic");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
     topic + "&api_key=TSUNPTa6z2tklGuh4PZEaPMuEogApupk&=10";
@@ -13,11 +14,15 @@ $.ajax({
     method: "GET"
   })
   .then(function(response){
+      console.log(response);
+      //need to go inside the object
+      //to get to the ratings
+      //can't figure out how to do it.
     var results = response.data;
 
 for(var i = 0; i < 10; i++){
     var gifsDiv = $("<div>");
-    var rate = results[i].rate;
+    var rate = results[i].rating;
     var para = $("<p>").text("Rating: " + rate);
     var image = $("<img>");
     image.attr("src")
@@ -44,7 +49,7 @@ $(".gif").on("click", function(){
 })
 };
 function renderButtons(){
-    $("buttons-view").empty();
+    $("#buttons-view").empty();
     for(var j = 0; j < topics.length; j++){
         var topicBtn = $("<button>");
         topicBtn.addClass("topic");
@@ -60,7 +65,7 @@ $("#add-giphy").on("click", function(event){
     var topic = $("#giphy-input").val().trim();
     topics.push(topic);
     renderButtons();
-    $("giphy-input").val("");
+    $("#giphy-input").val("");
 })
 $(document).on("click", ".topic", display);
 
