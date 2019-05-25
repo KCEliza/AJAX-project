@@ -1,0 +1,8 @@
+.container{
+    text-align: center;
+    width: 33%;
+    margin-left:33%;
+}
+.topic, #add-giphy{
+    margin:10px;
+}
